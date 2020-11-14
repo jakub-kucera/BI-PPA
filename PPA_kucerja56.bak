@@ -1,0 +1,15 @@
+#lang slideshow
+;(define *rules* '((1 1 1) (1 1 0) (1 0 1) (1 0 0)
+;		  (0 1 1) (0 1 0) (0 0 1) (0 0 0)))
+;(define (get-new- old-pattern)
+  ;if == 111 || 000 || 100 => ret 0
+  ;else 1
+
+ ; )
+
+(define (print-row row)
+  ;if null
+  (print (car row))
+  (print-row (cdr row)))
+
+(print-row '(0 1 0))

@@ -28,10 +28,13 @@
         (true (car (cdr (cdr list))))))
 
 (define (generate-row-rec list)
+  (print list)
+  (display "\n")
   (cond ((null? (get-3rd-cell list)) 0 display "2220"));nothing
   (cond (true (cons (car list) (generate-row-rec (cdr list))))))
 
 (define (generate-row list)
+  (print list)
   (cons 0 (generate-row-rec list)))
 
 ;first 0

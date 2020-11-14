@@ -9,7 +9,6 @@
 (define (get-new-cell old-list)
   (let((pattern (take old-list 3)))
   (cond ((null? old-list) null)
-        ((null? (get-3rd-cell old-list)) 0)
         ((equal? pattern '(1 1 1)) 0)
         ((equal? pattern '(1 0 0)) 0)
         ((equal? pattern '(0 0 0)) 0)
@@ -36,15 +35,14 @@
 ;main function that generates a given number of sequential rule 110 transformations
 (define (generate-110 list rows)
   (print-row list)
-  ;if length(list) < 3 return null
   (cond ((< (length list) 3) (display "Invalid input."))
         ((> rows 0)
          (let((new-row (generate-row list)))
          (generate-110 new-row (- rows 1))))))
 
 (generate-110 '(1 0 1 0 1 1 1 1 1 0) 10)
-;(generate-110 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 1 0 1 1 1 1 1 0 0 0 ) 100)
-;(generate-110 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 1 1 1) 100)
-;(generate-110 '(1 0 1 0 1 1 1 1 1 1) 10)
-;(generate-110 '(0 1) 10)
-;(generate-110 '() 10)
+(generate-110 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 1 0 1 1 1 1 1 0 0 0 ) 100)
+(generate-110 '(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 1 1 1) 100)
+(generate-110 '(1 0 1 0 1 1 1 1 1 1) 10)
+(generate-110 '(0 1) 10)
+(generate-110 '() 10)

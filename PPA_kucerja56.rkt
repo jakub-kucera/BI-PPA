@@ -7,35 +7,50 @@
         ((= (car list) 0) (display "_")(print-row (cdr list)))
   ))
 
+;(define (get-pattern list)
+  
+
+;(define (translate-pattern old-pattern)
+;  (cond ((equal? (take old-pattern 3) '(1 1 1)) 0)
+;        ((equal? (take old-pattern 3) '(1 0 0)) 0)
+;        ((equal? (take old-pattern 3) '(0 0 0)) 0)
+;        ( true 1)))
+
 ;matches a new cell state to old pattern
 (define (get-new-cell old-pattern)
   (cond ((null? old-pattern) null)
-        ((equal? old-pattern '(1 1 1)) 0)
-        ((equal? old-pattern '(1 0 0)) 0)
-        ((equal? old-pattern '(0 0 0)) 0)
+        ((null? (get-2nd-cell old-pattern)) 0)
+        ((null? (get-3rd-cell old-pattern)) 0)
+        ;(true (translate-pattern old-pattern))))
+        ((equal? (take old-pattern 3) '(1 1 1)) 0)
+        ((equal? (take old-pattern 3) '(1 0 0)) 0)
+        ((equal? (take old-pattern 3) '(0 0 0)) 0)
         ( true 1)))
 
+;return 2nd cell in a list, or null.
 (define (get-2nd-cell list)
   (cond ((null? list) null)
         ((null? (cdr list)) null)
         (true (car (cdr list)))))
   ;(car (cdr list)))
 
+;return 3rd cell in a list, or null.
 (define (get-3rd-cell list)
   (cond ((null? list) null)
         ((null? (cdr list)) null)
         ((null? (cdr (cdr list))) null)
         (true (car (cdr (cdr list))))))
 
-(define (generate-row-rec list)
+(define (generate-row-rec list);maybe useless, use map?
   (print list)
   (display "\n")
-  (cond ((null? (get-3rd-cell list)) 0 display "2220"));nothing
-  (cond (true (cons (car list) (generate-row-rec (cdr list))))))
+  (cond ((null? (get-3rd-cell list)) #\A);last zero
+        (true (cons (car list) (generate-row-rec (cdr list))))))
 
 (define (generate-row list)
   (print list)
-  (cons 0 (generate-row-rec list)))
+  ;(cons 0 (generate-row-rec list)))
+  (cons 0 (map(lambda (w) (get-new-cell w)) list)));wrong length
 
 ;first 0
 (define (generate-110 list rows)
@@ -56,4 +71,6 @@
 
 ;(generate-110 '(1 0 1 0 1 1 1 1 1 1) 0)
 
-(generate-row '(1 0 1 0 1 1 1 1 1 1))
+;(print (generate-row '(0 0 0 0 0 0 0 0 0 0)))
+(print (get-new-cell '(0 1 0 1 0 1 0 1 0)))
+(print (get-new-cell '(0 0)))
